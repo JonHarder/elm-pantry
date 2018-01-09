@@ -4,13 +4,14 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "build": "webpack",
-	"client": "webpack-dev-server"
+        "build": "gulp build",
+        "client": "gulp"
     },
     "devDependencies": {
-        "elm-webpack-loader": "^4.4.0",
-        "file-loader": "^1.1.6",
-        "webpack": "^3.10.0",
-        "webpack-dev-server": "^2.10.0"
-    }
+        "gulp": "^3.9.1",
+        "gulp-connect": "^5.2.0",
+        "gulp-elm": "^0.7.2",
+        "gulp-plumber": "^1.2.0"
+    },
+    "dependencies": {}
 }

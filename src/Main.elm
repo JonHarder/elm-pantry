@@ -36,7 +36,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [] [
-         text <| "recipe " ++ model.recipe
+         text <| "Recipe: " ++ model.recipe
         ]
 
 
