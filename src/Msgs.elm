@@ -10,4 +10,5 @@ import Model exposing (..)
 type Msg = GetResource Resource
          | GotResource (Result Http.Error String)
          | SetId String
+         | SetResource String
 

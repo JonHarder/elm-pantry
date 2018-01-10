@@ -7,6 +7,7 @@ type Resource
 
 
 type alias Model =
-    { recipeId : Int
-    , recipeName : String
+    { resourceId : Int
+    , resourceName : String
+    , resourceType : Resource
     }
