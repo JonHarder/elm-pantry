@@ -2,7 +2,9 @@ module Main exposing (..)
 
 
 -- System libraries
-import Html exposing (Html, div, program, sub, text)
+import Html exposing (Html, button, div, input, program, sub, text)
+import Html.Attributes exposing (..)
+import Html.Events exposing (onClick, onInput)
 
 -- User libraries
 import Commands
@@ -12,17 +14,25 @@ import Msgs exposing (Msg, Msg(..))
 
 -----------------------------------------
 init : (Model, Cmd Msg)
-init = (Model "", Commands.getResource Recipe 1)
+init = let model = Model 1 ""
+       in (model, Commands.getResource Recipe model.recipeId)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        GetResource resource id ->
-            (model, Commands.getResource resource id)
+        SetId idStr ->
+            case String.toInt idStr of
+                Ok id ->
+                    ({model | recipeId = id}, Cmd.none)
+                Err _ ->
+                    (model, Cmd.none)
+
+        GetResource resource ->
+            (model, Commands.getResource resource model.recipeId)
 
         GotResource (Ok name) ->
-            ({model | recipe = name}, Cmd.none)
+            ({model | recipeName = name}, Cmd.none)
 
         GotResource (Err _) ->
             (model, Cmd.none)
@@ -31,7 +41,17 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [] [
-         text <| "Recipe: " ++ model.recipe
+         div [] [
+              text <| "Recipe id: " ++ toString model.recipeId
+             ],
+         div [] [
+              text <| "Recipe: " ++ model.recipeName
+             ],
+         div [] [
+              input [ placeholder "id", onInput SetId ] []
+             , button [ onClick (GetResource Recipe) ]
+                  [ text "Get Recipe" ]
+             ]
         ]
 
 

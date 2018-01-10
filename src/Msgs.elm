@@ -7,6 +7,7 @@ import Model exposing (..)
 
 
 -- Msg
-type Msg = GetResource Resource Int
+type Msg = GetResource Resource
          | GotResource (Result Http.Error String)
+         | SetId String
 
