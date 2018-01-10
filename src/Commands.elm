@@ -5,12 +5,24 @@ import Http
 import Json.Decode exposing (Decoder, field, list, string)
 
 import Msgs exposing (Msg(GotResource))
+import Model exposing (..)
 
 
-getResource : String -> Cmd Msg
-getResource resource =
-    let request = Http.get ("http://localhost:4000/" ++ resource ++ "/1")
-                  recipe 
+api : String
+api = "http://localhost:4000/"
+
+
+requestBuilder : Resource -> Int -> String
+requestBuilder resource id =
+    let r = case resource of
+                Recipe -> "recipes"
+                Ingredient -> "ingredients"
+    in api ++ r ++ "/" ++ toString id
+
+
+getResource : Resource -> Int -> Cmd Msg
+getResource resource id =
+    let request = Http.get (requestBuilder resource id) recipe
     in Http.send GotResource request
 
 

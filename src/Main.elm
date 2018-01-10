@@ -6,25 +6,20 @@ import Html exposing (Html, div, program, sub, text)
 
 -- User libraries
 import Commands
+import Model exposing (..)
 import Msgs exposing (Msg, Msg(..))
-
-
--- Model
-type alias Model =
-    { recipe : String
-    }
 
 
 -----------------------------------------
 init : (Model, Cmd Msg)
-init = (Model "", Commands.getResource "recipes")
+init = (Model "", Commands.getResource Recipe 1)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        GetResource resource ->
-            (model, Commands.getResource resource)
+        GetResource resource id ->
+            (model, Commands.getResource resource id)
 
         GotResource (Ok name) ->
             ({model | recipe = name}, Cmd.none)
