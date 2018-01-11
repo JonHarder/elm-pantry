@@ -2,9 +2,7 @@ module Main exposing (..)
 
 
 -- System libraries
-import Html exposing (Html, button, div, input, program, option, select, sub, text)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onClick, onInput)
+import Html exposing (program)
 
 -- User libraries
 import Commands
