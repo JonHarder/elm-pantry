@@ -1,6 +1,9 @@
 module Model exposing (..)
 
 
+import Element.Input as Input
+
+
 type Resource
     = Recipe
     | Ingredient
@@ -14,8 +17,9 @@ toResource r =
         _ -> Nothing
 
 
-type alias Model =
+type alias Model msg =
     { resourceId : Int
     , resourceName : String
     , resourceType : Resource
+    , selection : Input.SelectWith Resource msg
     }

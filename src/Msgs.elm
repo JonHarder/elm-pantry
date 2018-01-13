@@ -1,6 +1,8 @@
-module Msgs exposing (..)
+module Msgs exposing (Msg, Msg(..))
 
 import Http
+
+import Element.Input as Input
 
 
 import Model exposing (..)
@@ -10,5 +12,5 @@ import Model exposing (..)
 type Msg = GetResource Resource
          | GotResource (Result Http.Error String)
          | SetId String
-         | SetResource String
+         | SetResource (Input.SelectMsg Resource)
 

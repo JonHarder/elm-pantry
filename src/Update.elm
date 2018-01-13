@@ -4,21 +4,14 @@ import Commands exposing (getResource)
 import Model exposing (..)
 import Msgs exposing (..)
 
+import Element.Input as Input
 
-getResourceForModel : Model -> Cmd Msg
+getResourceForModel : Model Msg -> Cmd Msg
 getResourceForModel model =
     Commands.getResource model.resourceType model.resourceId
 
 
-updateModelWithResource : Model -> String -> Model
-updateModelWithResource model resource =
-    let resource_ = case toResource resource of
-                        Just r -> r
-                        Nothing -> model.resourceType
-    in {model | resourceType = resource_}
-
-
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model Msg -> (Model Msg, Cmd Msg)
 update msg model =
     case msg of
         SetId idStr ->
@@ -26,9 +19,7 @@ update msg model =
             in ({model | resourceId = id}, Cmd.none)
 
         SetResource resource ->
-            let newModel = updateModelWithResource model resource
-                command = getResourceForModel newModel
-            in (newModel, command)
+            ({model | selection = Input.updateSelection resource model.selection }, Cmd.none)
 
         GetResource resource ->
             (model, Commands.getResource resource model.resourceId)
