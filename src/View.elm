@@ -81,15 +81,15 @@ view model =
                   [ text "Pantry"
                   ],
               row Basic [center]
-                  [ column None [center, width (percent 50)]
+                  [ column None [center, width (percent 50), padding 15]
                       [ text "Current Resource: "
                       , text (toString (Input.selected model.selection))
                       ]
-                  , column None [center, width (percent 50)]
+                  , column None [center, width (percent 50), padding 15]
                       [ Input.text None []
                             { onChange = SetId
-                            , value = "foo"
-                            , label = Input.labelLeft (text "Foo")
+                            , value = ""
+                            , label = Input.labelLeft (text "Resource ID ")
                             , options = []
                             }
                       ]

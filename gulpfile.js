@@ -17,7 +17,7 @@ gulp.task('elm-init', elm.init);
 gulp.task('elm', ['elm-init'], () => {
     return gulp.src(paths.elm)
         .pipe(plumber())
-        .pipe(elm())
+        .pipe(elm.bundle('bundle.js'))
         .pipe(gulp.dest(paths.dest));
 });
 
